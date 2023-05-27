@@ -41,4 +41,4 @@ jobs:
                   phpstan analyse ./src -l3
                   phpdd ./src
                   phpcpd ./src --exclude './src/Controller/Admin/' --exclude './src/Entity'
-              allow_failure: true
+              continue-on-error: true
