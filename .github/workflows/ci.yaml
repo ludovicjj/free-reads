@@ -9,8 +9,8 @@ jobs:
             matrix:
                 operating-system: [ ubuntu-latest ]
                 php-versions: [ '8.1' ]
-#        container:
-#            image: jakzal/phpqa:php8.1
+        container:
+            image: jakzal/phpqa:php8.1
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
