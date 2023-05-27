@@ -37,12 +37,12 @@ jobs:
             - name: PHPStan
               uses: docker://jakzal/phpqa:php8.1
               with:
-                  args: phpstan analyze src/ -l 3
+                  args: phpstan analyze src/ -l3
 
             - name: PHP-CS-Fixer
               uses: docker://jakzal/phpqa:php8.1
               with:
-                  args: php-cs-fixer --dry-run --rules=@Symfony --verbose
+                  args: php-cs-fixer fix src/ --dry-run --rules=@Symfony --verbose
 #    codestyle:
 #        name: Code style
 #        needs: build
