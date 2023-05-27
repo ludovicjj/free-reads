@@ -36,6 +36,7 @@ jobs:
 
     codestyle:
         name: Code style
+        needs: build
         runs-on: ubuntu-latest
         container: jakzal/phpqa:php8.1
         steps:
