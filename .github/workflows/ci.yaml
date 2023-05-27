@@ -5,6 +5,7 @@ jobs:
     build:
         name: Continuous Integration
         runs-on: ${{ matrix.operating-system }}
+        container: jakzal/phpqa:php8.1
         strategy:
             fail-fast: false
             matrix:
@@ -34,14 +35,16 @@ jobs:
             - name: Install Composer dependencies
               run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-    codestyle:
-        name: Code style
-        needs: build
-        runs-on: ubuntu-latest
-        container: jakzal/phpqa:php8.1
-        steps:
-            - name: PHP CS Fixer (via jakzal/phpqa)
-              run: phpstan analyse src -l3
+            - name: PHP Coding Standards
+              run: phpqa phpstan src -l3
+#    codestyle:
+#        name: Code style
+#        needs: build
+#        runs-on: ubuntu-latest
+#        container: jakzal/phpqa:php8.1
+#        steps:
+#            - name: PHP CS Fixer (via jakzal/phpqa)
+#              run: phpstan analyse src -l3
 #            - name: PHP Coding Standards
 #              run: |
 #                  php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
