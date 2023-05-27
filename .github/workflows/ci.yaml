@@ -40,7 +40,6 @@ jobs:
         container: jakzal/phpqa:php8.1
         steps:
             - name: PHP CS Fixer (via jakzal/phpqa)
-              uses: actions/checkout@v2
               run: php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
 #            - name: PHP Coding Standards
 #              run: |
