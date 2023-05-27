@@ -10,6 +10,17 @@ jobs:
             matrix:
                 operating-system: [ ubuntu-latest ]
                 php-versions: [ '8.1' ]
+        services:
+            image: postgres
+            env:
+                POSTGRES_PASSWORD: postgres
+            ports:
+                - "5432:5432"
+            options: >-
+                --health-cmd pg_isready
+                --health-interval 10s
+                --health-timeout 5s
+                --health-retries 5
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -33,6 +44,11 @@ jobs:
 
             - name: Install Composer dependencies
               run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+            - name: Symfony CLI
+              run: |
+                  curl -sS https://get.symfony.com/cli/installer | bash
+                  mv /home/runner/.symfony/bin/symfony /usr/local/bin/symfony
 
             - name: PHPStan
               uses: docker://jakzal/phpqa:php8.1
