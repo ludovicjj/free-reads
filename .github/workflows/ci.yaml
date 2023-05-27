@@ -5,7 +5,7 @@ jobs:
     build:
         name: Continuous Integration
         runs-on: ${{ matrix.operating-system }}
-        container: jakzal/phpqa:php8.1
+        container: jakzal/phpqa
         strategy:
             fail-fast: false
             matrix:
