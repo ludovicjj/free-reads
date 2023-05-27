@@ -41,7 +41,7 @@ jobs:
         container: jakzal/phpqa:php8.1
         steps:
             - name: PHP CS Fixer (via jakzal/phpqa)
-              run: php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
+              run: phpstan analyse src -l3
 #            - name: PHP Coding Standards
 #              run: |
 #                  php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
