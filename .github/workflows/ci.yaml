@@ -9,6 +9,8 @@ jobs:
             matrix:
                 operating-system: [ ubuntu-latest ]
                 php-versions: [ '8.1' ]
+        container:
+            image: jakzal/phpqa:php8.1
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
@@ -33,5 +35,10 @@ jobs:
             - name: Install Composer dependencies
               run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-            - name: Analyze code
-              run: composer phpstan
+            - name: PHP Coding Standards
+              run: |
+                  php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
+                  phpstan analyse ./src -l3
+                  phpdd ./src
+                  phpcpd ./src --exclude './src/Controller/Admin/' --exclude './src/Entity'
+              allow_failure: true
