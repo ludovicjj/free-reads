@@ -196,11 +196,11 @@ qa-cs-fixer-dry-run: ## Run php-cs-fixer in dry-run mode.
 .PHONY: qa-cs-fixer-dry-run
 
 qa-cs-fixer: ## Run php-cs-fixer.
-	$(PHPQA_RUN) php-cs-fixer fix src --rules=@Symfony --verbose
+	$(PHPQA_RUN) php-cs-fixer fix ./src --rules=@Symfony --verbose
 .PHONY: qa-cs-fixer
 
 qa-phpstan: ## Run phpstan.
-	$(PHPQA_RUN) phpstan analyse src --level=7
+	$(PHPQA_RUN) phpstan analyse ./src --level=7
 .PHONY: qa-phpstan
 
 qa-security-checker: ## Run security-checker.
