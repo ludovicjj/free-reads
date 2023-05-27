@@ -3,14 +3,13 @@ on: [push]
 
 jobs:
     build:
+        name: Continuous Integration
         runs-on: ${{ matrix.operating-system }}
         strategy:
             fail-fast: false
             matrix:
                 operating-system: [ ubuntu-latest ]
                 php-versions: [ '8.1' ]
-        container:
-            image: jakzal/phpqa:php8.1
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
@@ -35,6 +34,14 @@ jobs:
             - name: Install Composer dependencies
               run: composer install --no-progress --prefer-dist --optimize-autoloader
 
+    codestyle:
+        name: Code style
+        runs-on: ubuntu-latest
+        container: jakzal/phpqa:php8.1
+        steps:
+            - name: PHP CS Fixer (via jakzal/phpqa)
+              uses: actions/checkout@v2
+              run: php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
 #            - name: PHP Coding Standards
 #              run: |
 #                  php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
