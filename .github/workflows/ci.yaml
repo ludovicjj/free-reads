@@ -67,4 +67,4 @@ jobs:
                   APP_ENV=test symfony console --no-interaction d:m:m
                   ./bin/phpunit
               env:
-                  DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/app_test?serverVersion=15&charset=utf
+                  DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/app?serverVersion=15&charset=utf8
