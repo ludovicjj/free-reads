@@ -60,3 +60,11 @@ jobs:
               uses: docker://jakzal/phpqa:php8.1
               with:
                   args: php-cs-fixer fix src/ --dry-run --rules=@Symfony --verbose
+
+            - name: PHP Unit
+              run: |
+                  symfony console --no-interaction d:d:c --env=test
+                  symfony console --no-interaction d:m:m --env=test
+                  symfony php bin/phpunit
+              env:
+                  DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/app?serverVersion=15&charset=utf8
