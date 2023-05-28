@@ -63,8 +63,8 @@ jobs:
 
             - name: PHP Unit
               run: |
-                  APP_ENV=test symfony console --no-interaction doctrine:database:create
-                  APP_ENV=test symfony console --no-interaction d:m:m
-                  ./bin/phpunit
+                  symfony console --no-interaction doctrine:database:create --env=test
+                  symfony console --no-interaction d:m:m --env=test
+                  symfony php bin/phpunit
               env:
                   DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/app?serverVersion=15&charset=utf8
