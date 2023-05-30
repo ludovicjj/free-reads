@@ -46,10 +46,10 @@ jobs:
             - name: Install Composer dependencies
               run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-            - name: Symfony CLI
-              run: |
-                  curl -sS https://get.symfony.com/cli/installer | bash
-                  mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+#            - name: Symfony CLI
+#              run: |
+#                  curl -sS https://get.symfony.com/cli/installer | bash
+#                  mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
 
             - name: PHPStan
               uses: docker://jakzal/phpqa:php8.1
@@ -63,8 +63,8 @@ jobs:
 
             - name: PHP Unit
               run: |
-                  symfony console --no-interaction d:d:c --env=test
-                  symfony console --no-interaction d:m:m --env=test
-                  symfony php bin/phpunit
+                  php bin/console --no-interaction d:d:c --env=test
+                  php bin/console --no-interaction d:m:m --env=test
+                  php bin/phpunit
               env:
                   DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/app?serverVersion=15&charset=utf8
