@@ -58,6 +58,10 @@ docker-up: ## Start docker containers.
 docker-stop: ## Stop docker containers.
 	$(DOCKER_COMPOSE_STOP)
 .PHONY: docker-stop
+
+docker-qa-php-cs-version:
+	$(DOCKER_RUN) --init -it --rm -v "$(current_dir):/project" -w /project $(PHPQA) php-cs-fixer --version
+.PHONY: docker-qa-php-cs-version
 #---------------------------------------------#
 
 ## === SYMFONY ===============================================
